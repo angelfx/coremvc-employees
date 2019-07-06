@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Market.Abstract\Market.Abstract.csproj" />
+    <ProjectReference Include="..\Market.Entities\Market.Entities.csproj" />
+    <ProjectReference Include="..\Market.Models\Market.Models.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,68 @@
+﻿@model Market.MVC.Models.TableProductViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Products</h1>
+
+<p>
+    <a asp-action="Index" asp-controller="Admin" class="btn btn-outline-primary">Go to page for manage products</a>
+</p>
+
+@if (Model.Page > 1)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.Page - 1)"
+       class="btn btn-primary">
+        Previous
+    </a>
+}
+@if (Model.NextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.Page + 1)"
+       class="btn btn-primary">
+        Next
+    </a>
+}
+
+@{
+    var dummyModel = new ProductViewModel();
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => dummyModel.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummyModel.ShortTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummyModel.Image)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.ActionLink(item.ShortTitle, "Details", new { id = item.Id })
+                </td>
+                <td>
+                    @{
+                        var base64 = Convert.ToBase64String(item.Image);
+                        var imgSrc = String.Format("data:image;base64,{0}", base64);
+                    }
+                    <img src="@imgSrc" width="100" height="100" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

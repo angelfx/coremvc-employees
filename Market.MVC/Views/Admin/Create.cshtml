@@ -1,0 +1,65 @@
+﻿@model Market.MVC.Models.ProductFormViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<script type="text/javascript" asp-append-version="true" src="~/js/file.checker.js"></script>
+
+<h1>Create product</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="alert-danger" style="width:500px; margin-left:0px;">
+            @foreach (var error in Model.Errors)
+            {
+                <p>@error</p>
+            }
+        </div><br />
+        <form asp-action="Create" enctype="multipart/form-data" id="myform">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ImageExtension" id="imageExt" />
+            <input type="hidden" asp-for="ImageName" id="imageName" />
+            <div class="form-group">
+                <label asp-for="ShortTitle" class="control-label"></label>
+                <input asp-for="ShortTitle" class="form-control" />
+                <span asp-validation-for="ShortTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitId" class="control-label"></label>
+                <select asp-for="UnitId" asp-items="Model.UnitList"></select>
+                <span asp-validation-for="UnitId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Count" class="control-label"></label>
+                <input asp-for="Count" class="form-control" type="number" />
+                <span asp-validation-for="Count" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageForm" class="control-label"></label>
+                <input asp-for="ImageForm" type="file" id="image" data-custom-required="true" class="form-control" />
+                <span asp-validation-for="ImageForm" class="text-danger"></span>
+                <div id="alerts" style="width:500px; margin-left:0px;"></div><br />
+                <div id="imgContainer"></div>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="create" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-outline-primary">Back to list</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
